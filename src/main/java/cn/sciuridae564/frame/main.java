@@ -213,7 +213,7 @@ public class main extends JPanel {
                 int i = 0;
                 for (String s : stringListEntry.getValue()) {
                     File in = new File(file_dir + s);
-                    File file = new File(getUrlImage.file_out + stringListEntry.getKey()+"_"+i + ".png");
+                    File file = new File(file_out+"\\"+stringListEntry.getKey()+"\\" + s);
                     if(!file.exists()){
                         try {
                             FileUtils.copyFile(in,file);
@@ -264,8 +264,7 @@ public class main extends JPanel {
         OutUrl = new JLabel();
         OutUrlIn = new JTextField();
         Leaderupdate = new JButton();
-        scrollPane1 = new JScrollPane();
-        webImageName = new JTextArea();
+        webImageName = new JLabel();
         textArea4 = new JLabel();
         textArea5 = new JLabel();
         deleteMapper = new JButton();
@@ -369,12 +368,7 @@ public class main extends JPanel {
             }
         });
         add(Leaderupdate, "cell 4 3 2 1");
-
-        //======== scrollPane1 ========
-        {
-            scrollPane1.setViewportView(webImageName);
-        }
-        add(scrollPane1, "cell 1 4 2 1,grow");
+        add(webImageName, "cell 1 4 2 1,grow");
 
         //---- textArea4 ----
         textArea4.setText("\u9886\u8896\u540d");
@@ -473,8 +467,7 @@ public class main extends JPanel {
     private JLabel OutUrl;
     private JTextField OutUrlIn;
     private JButton Leaderupdate;
-    private JScrollPane scrollPane1;
-    private JTextArea webImageName;
+    private JLabel webImageName;
     private JLabel textArea4;
     private JLabel textArea5;
     private JButton deleteMapper;
