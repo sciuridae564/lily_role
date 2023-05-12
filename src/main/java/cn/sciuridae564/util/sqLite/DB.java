@@ -31,6 +31,7 @@ public class DB {
                     "CREATE TABLE if not exists image( id integer PRIMARY KEY AUTOINCREMENT, source_file_name TEXT UNIQUE, role_name TEXT);\n" +
                     "CREATE TABLE if not exists save( id integer PRIMARY KEY AUTOINCREMENT, save_dir TEXT UNIQUE, out_dir TEXT);\n" +
                     "\n"+
+                    "insert into _role(name,china_name) values('-','忽略')ON CONFLICT(china_name)DO UPDATE SET name='-';\n" +
                     "insert into _role(name,china_name) values('hitocuyanagi_riri','一柳梨璃')ON CONFLICT(china_name)DO UPDATE SET name='hitocuyanagi_riri';\n" +
                     "insert into _role(name,china_name) values('sirai_yuyu','白井梦结')ON CONFLICT(china_name)DO UPDATE SET name='sirai_yuyu';\n" +
                     "insert into _role(name,china_name) values('kaede_zyoan_nu_beru','枫·若昂·努韦勒')ON CONFLICT(china_name)DO UPDATE SET name='kaede_zyoan_nu_beru';\n" +

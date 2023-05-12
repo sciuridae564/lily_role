@@ -57,44 +57,20 @@ public class getUrlImage {
         @Override
         public void run() {
             if (weblink.contains(".png")){
-                try {
-                    URL imgaeSrcUrl = new URL(web+weblink);
-                    File file = new File(file_dir+weblink);
-                    File dir = new File(file.getParent());
-                    if (!dir.exists()){
-                        dir.mkdirs();
-                    }
-                    if(!file.exists()){
-                        FileUtils.copyURLToFile(imgaeSrcUrl, file);
-                    }
-                    return;
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                File file = new File(file_dir+weblink);
+                File dir = new File(file.getParent());
+                if (!dir.exists()){
+                    dir.mkdirs();
                 }
-            }
-
-            File dir = new File(file_dir+weblink);
-            if (!dir.exists()){
-                dir.mkdirs();
-            }
-            try {
-                Document lily_document = Jsoup.parse(new URL(web+weblink), 10000);
-                Elements box = lily_document.getElementsByClass("box");
-                if (box.size() == 0)
-                    return;
-                Elements a = box.get(0).getElementsByTag("a");
-                for (Element element : a) {
-                    URL imgaeSrcUrl = new URL(web+weblink+element.attr("href"));
-                    File file = new File(file_dir+weblink+element.attr("href"));
-                    if(file.exists())//跳过已有的
-                        continue;
-                    FileUtils.copyURLToFile(imgaeSrcUrl, file);
+                while (true){
+                    try {
+                        URL imgaeSrcUrl = new URL(web+weblink);
+                        if(!file.exists()){
+                            FileUtils.copyURLToFile(imgaeSrcUrl, file);
+                        }
+                        return;
+                    } catch (IOException ignored) {}
                 }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
     }

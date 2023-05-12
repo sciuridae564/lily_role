@@ -201,6 +201,7 @@ public class main extends JPanel {
     }
 
     private void generateMouseClicked(MouseEvent e) {
+        webText.setText("正在移动");
         file_dir = WebUrlIn.getText() + "\\";
         file_out = OutUrlIn.getText() + "\\";
         File dir = new File(file_out);
@@ -209,7 +210,7 @@ public class main extends JPanel {
         }
         DB.getInstance().insertsave(WebUrlIn.getText(),OutUrlIn.getText());
         for (Map.Entry<String, List<String>> stringListEntry : mapperMap.entrySet()) {
-            if(stringListEntry.getValue() != null && stringListEntry.getValue().size() > 0){
+            if(stringListEntry.getValue() != null && stringListEntry.getValue().size() > 0 && !stringListEntry.getKey().equals("忽略")){
                 int i = 0;
                 for (String s : stringListEntry.getValue()) {
                     File in = new File(file_dir + s);
@@ -224,7 +225,7 @@ public class main extends JPanel {
                 }
             }
         }
-
+        webText.setText("移动完了");
     }
     private static boolean hasLeader = true;
     private void LeaderupdateMouseClicked(MouseEvent e) {
@@ -264,7 +265,8 @@ public class main extends JPanel {
         OutUrl = new JLabel();
         OutUrlIn = new JTextField();
         Leaderupdate = new JButton();
-        webImageName = new JLabel();
+        scrollPane1 = new JScrollPane();
+        webImageName = new JTextArea();
         textArea4 = new JLabel();
         textArea5 = new JLabel();
         deleteMapper = new JButton();
@@ -368,7 +370,12 @@ public class main extends JPanel {
             }
         });
         add(Leaderupdate, "cell 4 3 2 1");
-        add(webImageName, "cell 1 4 2 1,grow");
+
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(webImageName);
+        }
+        add(scrollPane1, "cell 1 4 2 1,grow");
 
         //---- textArea4 ----
         textArea4.setText("\u9886\u8896\u540d");
@@ -467,7 +474,8 @@ public class main extends JPanel {
     private JLabel OutUrl;
     private JTextField OutUrlIn;
     private JButton Leaderupdate;
-    private JLabel webImageName;
+    private JScrollPane scrollPane1;
+    private JTextArea webImageName;
     private JLabel textArea4;
     private JLabel textArea5;
     private JButton deleteMapper;
